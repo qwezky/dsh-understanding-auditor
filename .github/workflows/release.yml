@@ -1,0 +1,30 @@
+name: release
+
+on:
+  push:
+    branches: [master]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    if: github.repository == 'qwezky/dsh-understanding-auditor'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Pack plugin
+        run: |
+          cd plugin
+          npm pack --pack-destination ..
+      - name: Create or update GitHub release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VERSION=$(node -p "require('./plugin/package.json').version")
+          TAG="v$VERSION"
+          gh release view "$TAG" >/dev/null 2>&1 || gh release create "$TAG" --title "理解审计员 $TAG" --notes-file RELEASE-v1.9.8.md
+          gh release upload "$TAG" "dsh-plugin-understanding-auditor-${VERSION}.tgz" --clobber
