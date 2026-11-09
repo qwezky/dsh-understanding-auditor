@@ -1,0 +1,209 @@
+{
+  "graph": {
+    "graph_id": "audit-20261107-001",
+    "version": "1.2",
+    "created_at": "2026-11-07T07:58:38.942Z",
+    "report_span": "该方案通过过程性追问提升学生的认知参与度。相比于传统课堂提问，过程性追问不追求标准答案，而是不断逼近学生的真实思路。已有研究表明，认知卸载会削弱深度学习，因此减",
+    "nodes": {
+      "R1": {
+        "text": "过程性追问提升学生的认知参与度",
+        "kind": "claim",
+        "origin": "ai",
+        "origin_basis": "lineage 中 s2 为 ai generated，用户未 rewrite；retention_index 中该概念亦为 ai_summary",
+        "parents": [
+          "T1",
+          "T2"
+        ],
+        "children": [],
+        "level": 2,
+        "risk": "high",
+        "provenance": "ai_summary",
+        "ai_variant": true
+      },
+      "T1": {
+        "text": "过程性追问",
+        "kind": "term",
+        "origin": "ai",
+        "origin_basis": "lineage 中仅 s2（ai generated）覆盖，用户未重写",
+        "parents": [],
+        "children": [
+          "R1",
+          "R2"
+        ],
+        "level": 1,
+        "risk": "mid",
+        "provenance": "ai_summary",
+        "ai_variant": true
+      },
+      "T2": {
+        "text": "认知参与度",
+        "kind": "term",
+        "origin": "ai",
+        "origin_basis": "retention_index 标注为 ai_summary，lineage 无用户来源覆盖",
+        "parents": [],
+        "children": [
+          "R1"
+        ],
+        "level": 1,
+        "risk": "mid",
+        "provenance": "ai_summary",
+        "ai_variant": true
+      },
+      "T3": {
+        "text": "认知卸载",
+        "kind": "term",
+        "origin": "human",
+        "origin_basis": "retention_index 标注为 human / user_source，note_id n-12",
+        "parents": [],
+        "children": [
+          "R2"
+        ],
+        "level": 1,
+        "risk": "low",
+        "provenance": "user_source"
+      },
+      "R2": {
+        "text": "减少认知卸载是提升参与度的关键",
+        "kind": "reason",
+        "origin": "ai",
+        "origin_basis": "lineage 中仅 s2（ai generated）覆盖，用户未重写",
+        "parents": [
+          "T1",
+          "T3"
+        ],
+        "children": [
+          "C1"
+        ],
+        "level": 2,
+        "risk": "high",
+        "provenance": "ai_summary"
+      },
+      "C1": {
+        "text": "追问若只发生在学习结束后，教师拿到的只是答案而非思路",
+        "kind": "conclusion",
+        "origin": "ai",
+        "origin_basis": "lineage 中仅 s2（ai generated）覆盖，用户未重写",
+        "parents": [
+          "R2"
+        ],
+        "children": [
+          "C2"
+        ],
+        "level": 3,
+        "risk": "mid",
+        "provenance": "ai_summary"
+      },
+      "C2": {
+        "text": "因此报告把“过程中”单独提出来",
+        "kind": "conclusion",
+        "origin": "ai",
+        "origin_basis": "lineage 中仅 s2（ai generated）覆盖，用户未重写",
+        "parents": [
+          "C1"
+        ],
+        "children": [],
+        "level": 4,
+        "risk": "mid",
+        "provenance": "ai_summary"
+      }
+    },
+    "edges": [
+      {
+        "from": "T1",
+        "to": "R1",
+        "type": "prereq"
+      },
+      {
+        "from": "T2",
+        "to": "R1",
+        "type": "prereq"
+      },
+      {
+        "from": "T1",
+        "to": "R2",
+        "type": "prereq"
+      },
+      {
+        "from": "T3",
+        "to": "R2",
+        "type": "prereq"
+      },
+      {
+        "from": "R2",
+        "to": "C1",
+        "type": "prereq"
+      },
+      {
+        "from": "C1",
+        "to": "C2",
+        "type": "prereq"
+      }
+    ],
+    "cycles": [],
+    "non_prereq_links": [],
+    "components": [
+      {
+        "component_id": "G-01",
+        "entry_ids": [
+          "R1",
+          "C2"
+        ],
+        "node_ids": [
+          "R1",
+          "T1",
+          "T2",
+          "T3",
+          "R2",
+          "C1",
+          "C2"
+        ],
+        "status": {
+          "state": "unchecked",
+          "asked": 0,
+          "skipped": [],
+          "refilled": [],
+          "reasked": [],
+          "spot_checks": []
+        }
+      }
+    ],
+    "dial": 3
+  },
+  "risk_points": [
+    {
+      "node_id": "R1",
+      "quote": "该方案通过过程性追问提升学生的认知参与度。",
+      "question_type": "复述解释题",
+      "level": "high",
+      "reason": "核心结论，未说明追问通过什么机制提升参与度"
+    },
+    {
+      "node_id": "T2",
+      "quote": "提升学生的认知参与度",
+      "question_type": "术语定义题",
+      "level": "high",
+      "reason": "全文反复使用“认知参与度”，报告未给出定义或衡量方式"
+    },
+    {
+      "node_id": "R2",
+      "quote": "因此减少认知卸载是提升参与度的关键。",
+      "question_type": "前提变换题",
+      "level": "high",
+      "reason": "由“认知卸载削弱深度学习”直接推出“减少卸载是提升参与度的关键”，依赖隐含前提，换前提可能不成立"
+    },
+    {
+      "node_id": "T1",
+      "quote": "过程性追问不追求标准答案，而是不断逼近学生的真实思路。",
+      "question_type": "术语定义题",
+      "level": "mid",
+      "reason": "“过程性追问”反复出现，报告只给特征描述，未界定其边界"
+    },
+    {
+      "node_id": "C1",
+      "quote": "如果追问只发生在学习结束后，学生已经离开思考现场，教师拿到的就只是答案，而不是思路。",
+      "question_type": "前提变换题",
+      "level": "mid",
+      "reason": "结论依赖“学习结束后学生已离开思考现场”这一隐含前提，换前提可能不成立"
+    }
+  ]
+}

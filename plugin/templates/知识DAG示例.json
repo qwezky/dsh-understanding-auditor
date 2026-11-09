@@ -1,0 +1,173 @@
+{
+  "graph_id": "audit-demo-001",
+  "version": "1.2",
+  "created_at": "2026-11-07T12:00:00+08:00",
+  "report_span": "（已脱敏）该方案通过过程性追问提升学生的认知参与度……本工具能帮助教师识别学生的虚假掌握。",
+  "summary_root": null,
+  "nodes": {
+    "R1": {
+      "text": "过程性追问提升认知参与度",
+      "kind": "claim",
+      "origin": "ai",
+      "origin_basis": "§2 由 AI 起草，无引文",
+      "parents": [
+        "T1",
+        "T3"
+      ],
+      "children": [],
+      "level": 3,
+      "risk": "high",
+      "provenance": "ai_summary"
+    },
+    "T1": {
+      "text": "过程性追问",
+      "kind": "term",
+      "origin": "ai",
+      "parents": [],
+      "children": [
+        "R1"
+      ],
+      "level": 1,
+      "risk": "mid",
+      "provenance": "ai_summary"
+    },
+    "T3": {
+      "text": "认知参与度",
+      "kind": "term",
+      "origin": "ai",
+      "parents": [
+        "T4"
+      ],
+      "children": [
+        "R1"
+      ],
+      "level": 2,
+      "risk": "high",
+      "provenance": "ai_summary"
+    },
+    "T4": {
+      "text": "认知卸载",
+      "kind": "term",
+      "origin": "human",
+      "parents": [],
+      "children": [
+        "T3",
+        "R2"
+      ],
+      "level": 1,
+      "risk": "low",
+      "evidence": {
+        "type": "citation",
+        "ref": "[3]"
+      },
+      "provenance": "user_source"
+    },
+    "R2": {
+      "text": "工具能识别虚假掌握",
+      "kind": "claim",
+      "origin": "human",
+      "origin_basis": "§4 作者自述",
+      "parents": [
+        "T4",
+        "T5"
+      ],
+      "children": [],
+      "level": 2,
+      "risk": "mid",
+      "provenance": "ai_summary"
+    },
+    "T5": {
+      "text": "虚假掌握",
+      "kind": "term",
+      "origin": "ai",
+      "parents": [],
+      "children": [
+        "R2"
+      ],
+      "level": 1,
+      "risk": "mid",
+      "provenance": "ai_summary"
+    },
+    "T6": {
+      "text": "自检式提问",
+      "kind": "term",
+      "origin": "human",
+      "parents": [],
+      "children": [
+        "R2"
+      ],
+      "level": 1,
+      "risk": "low",
+      "evidence": {
+        "type": "textbook",
+        "ref": "课程材料 §3"
+      },
+      "provenance": "user_source"
+    }
+  },
+  "edges": [
+    {
+      "from": "T1",
+      "to": "R1",
+      "type": "prereq"
+    },
+    {
+      "from": "T3",
+      "to": "R1",
+      "type": "prereq"
+    },
+    {
+      "from": "T4",
+      "to": "T3",
+      "type": "prereq"
+    },
+    {
+      "from": "T4",
+      "to": "R2",
+      "type": "prereq"
+    },
+    {
+      "from": "T5",
+      "to": "R2",
+      "type": "prereq"
+    },
+    {
+      "from": "T6",
+      "to": "R2",
+      "type": "prereq"
+    }
+  ],
+  "cycles": [],
+  "non_prereq_links": [
+    {
+      "from": "T3",
+      "to": "T5",
+      "type": "contrast"
+    }
+  ],
+  "components": [
+    {
+      "component_id": "G-01",
+      "entry_ids": [
+        "R1",
+        "R2"
+      ],
+      "node_ids": [
+        "R1",
+        "T1",
+        "T3",
+        "T4",
+        "R2",
+        "T5",
+        "T6"
+      ],
+      "status": {
+        "state": "unchecked",
+        "asked": 0,
+        "skipped": [],
+        "refilled": [],
+        "reasked": []
+      }
+    }
+  ]
+}

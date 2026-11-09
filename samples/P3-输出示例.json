@@ -1,0 +1,22 @@
+{
+  "mode": "judge",
+  "question_id": "Q1",
+  "verdict": "partial",
+  "hit_points": [],
+  "miss_points": [
+    "追问发生在学习过程中，而不是学习结束后",
+    "追问迫使学生把思路说出来",
+    "思路外化之后才可能被教师调整",
+    "报告把“过程中”单独提出来作为关键"
+  ],
+  "conflict": false,
+  "evidence": "用户原话：“就是多问几句，让学生多想。”",
+  "confidence": 0.86,
+  "needs_review": false,
+  "reread": [
+    "§2 第 1 句：该方案通过过程性追问提升学生的认知参与度",
+    "§2 第 2 段：追问的三个时机"
+  ],
+  "first_verdict": "partial",
+  "disclaimer": "这是对这道题回答的判定，不是对报告的评分。"
+}

@@ -1,0 +1,213 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "理解审计员题库",
+  "type": "object",
+  "required": [
+    "version",
+    "audit_id",
+    "created_at",
+    "questions"
+  ],
+  "properties": {
+    "version": {
+      "type": "string",
+      "const": "1.0"
+    },
+    "audit_id": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "report_span": {
+      "type": "string",
+      "description": "已脱敏的报告片段"
+    },
+    "budget": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "minimum": 3,
+          "maximum": 7
+        },
+        "simple": {
+          "type": "integer"
+        },
+        "normal": {
+          "type": "integer"
+        },
+        "upgraded": {
+          "type": "boolean"
+        }
+      }
+    },
+    "questions": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 7,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "阶段",
+          "题型",
+          "档位",
+          "来源原文",
+          "题目",
+          "期望要点",
+          "用户回答",
+          "判定",
+          "判定依据",
+          "时间戳"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "题型": {
+            "type": "string",
+            "enum": [
+              "复述解释题",
+              "前提变换题",
+              "术语定义题"
+            ]
+          },
+          "档位": {
+            "type": "string",
+            "enum": [
+              "simple",
+              "normal"
+            ]
+          },
+          "阶段": {
+            "type": "string",
+            "enum": [
+              "first_pass",
+              "reask",
+              "spot"
+            ],
+            "description": "first_pass 第一轮 / spot 抽查 / reask 补全回访（变式题）"
+          },
+          "variant_of": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "reask 时指向被跳过的原题 id"
+          },
+          "root_id": {
+            "type": "string"
+          },
+          "node_id": {
+            "type": "string"
+          },
+          "来源原文": {
+            "type": "string"
+          },
+          "题目": {
+            "type": "string"
+          },
+          "期望要点": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1
+          },
+          "追问": {
+            "type": "string"
+          },
+          "难度": {
+            "type": "string",
+            "enum": [
+              "低",
+              "中",
+              "高"
+            ]
+          },
+          "用户回答": {
+            "type": "string"
+          },
+          "判定": {
+            "type": "string",
+            "enum": [
+              "correct",
+              "partial",
+              "wrong",
+              "unsure",
+              "skipped"
+            ]
+          },
+          "判定依据": {
+            "type": "object",
+            "properties": {
+              "hit_points": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "miss_points": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "evidence": {
+                "type": "string",
+                "description": "引用用户原话"
+              },
+              "confidence": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "needs_review": {
+                "type": "boolean"
+              },
+              "first_verdict": {
+                "type": "string"
+              }
+            }
+          },
+          "建议": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "时间戳": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "spot_check": {
+            "type": "boolean"
+          },
+          "component_id": {
+            "type": "string"
+          },
+          "origin": {
+            "type": "string",
+            "enum": [
+              "human",
+              "ai"
+            ],
+            "description": "仅内部使用，默认不导出"
+          }
+        }
+      },
+      "description": "第一轮 3–5 题；含补全回访后单次合计 ≤7 题"
+    },
+    "disclaimer": {
+      "type": "string",
+      "const": "本结果是对你理解状态的一次抽样提示，不是评分，也不代表报告内容正确或错误。题目只覆盖了本轮抽到的知识点，未覆盖的部分不代表没有问题。请把它当作回读的线索，而不是结论。"
+    },
+    "dial": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5
+    }
+  }
+}

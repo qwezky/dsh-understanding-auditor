@@ -1,0 +1,32 @@
+{
+  "name": "dsh-plugin-understanding-auditor",
+  "version": "1.9.8",
+  "description": "理解审计员 v1.9：/record 记录器（lineage/handoff）+ /audit 审计 UI（DAG、题卡、判定、导出）",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json",
+    "./cordis.patch.yml": "./cordis.patch.yml"
+  },
+  "files": [
+    "lib",
+    "prompts",
+    "templates",
+    "cordis.patch.yml",
+    "README.md"
+  ],
+  "license": "MIT",
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web"
+    }
+  },
+  "optionalDependencies": {
+    "pdfjs-dist": "^6.4.299"
+  }
+}

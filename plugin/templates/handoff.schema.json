@@ -1,0 +1,272 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "留存 → 审计 handoff",
+  "type": "object",
+  "required": [
+    "handoff_id",
+    "report_id",
+    "finalized_at",
+    "report_text",
+    "lineage",
+    "retention_index",
+    "dial",
+    "consent",
+    "recording"
+  ],
+  "properties": {
+    "handoff_id": {
+      "type": "string"
+    },
+    "report_text": {
+      "type": "string",
+      "description": "已脱敏的报告正文"
+    },
+    "report_source": {
+      "type": "string",
+      "enum": [
+        "chat",
+        "file"
+      ],
+      "description": "报告正文来自聊天累计还是 /record end <文件>"
+    },
+    "retention_index": {
+      "type": "array",
+      "description": "只传索引，不传摘要全文",
+      "items": {
+        "type": "object",
+        "required": [
+          "concept",
+          "origin",
+          "provenance"
+        ],
+        "properties": {
+          "concept": {
+            "type": "string"
+          },
+          "origin": {
+            "type": "string",
+            "enum": [
+              "human",
+              "ai"
+            ]
+          },
+          "self_rating": {
+            "type": "string",
+            "enum": [
+              "can_explain",
+              "heard_only",
+              "no_memory",
+              "no_record"
+            ],
+            "description": "可选，仅作复习排序，不决定 origin"
+          },
+          "note_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "source": {
+            "type": "string"
+          },
+          "provenance": {
+            "type": "string",
+            "enum": [
+              "user_source",
+              "user_note",
+              "ai_summary",
+              "external",
+              "unknown"
+            ]
+          },
+          "summary_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "user_note_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "dial": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5
+    },
+    "consent": {
+      "type": "boolean",
+      "const": true
+    },
+    "report_id": {
+      "type": "string"
+    },
+    "finalized_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "lineage": {
+      "type": "array",
+      "description": "写作过程中自动记录的来源谱系，每段文本一条",
+      "items": {
+        "type": "object",
+        "required": [
+          "span_id",
+          "author",
+          "event",
+          "range"
+        ],
+        "properties": {
+          "span_id": {
+            "type": "string"
+          },
+          "author": {
+            "type": "string",
+            "enum": [
+              "user",
+              "ai",
+              "external"
+            ]
+          },
+          "event": {
+            "type": "string",
+            "enum": [
+              "typed",
+              "pasted",
+              "generated",
+              "rewrite"
+            ]
+          },
+          "of": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "rewrite 指向被改写的 AI span"
+          },
+          "range": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "turn_id": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "report_selection": {
+      "type": "object",
+      "description": "默认只取最后一条报告正文时，记录候选段数与选中段",
+      "additionalProperties": true
+    },
+    "knowledge_spans": {
+      "type": "array",
+      "description": "每个知识来源段落的不可读指纹（n-gram 哈希），不含原句；用于在报告被改写后仍能判断概念是谁提出的",
+      "items": {
+        "type": "object",
+        "required": [
+          "span_id",
+          "author",
+          "event",
+          "length",
+          "bi",
+          "tri"
+        ],
+        "properties": {
+          "span_id": {
+            "type": "string"
+          },
+          "turn_id": {
+            "type": "string"
+          },
+          "seq": {
+            "type": "integer"
+          },
+          "author": {
+            "type": "string",
+            "enum": [
+              "user",
+              "ai",
+              "external"
+            ]
+          },
+          "event": {
+            "type": "string",
+            "enum": [
+              "typed",
+              "pasted",
+              "generated",
+              "rewrite"
+            ]
+          },
+          "length": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "bi": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "2-gram 哈希"
+          },
+          "tri": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "3-gram 哈希"
+          }
+        }
+      }
+    },
+    "knowledge_spans_dropped": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "因体积预算被省略的指纹段数；省略只会让来源退回 ai，不会误标 human"
+    },
+    "recorded_by": {
+      "type": "string",
+      "enum": [
+        "plugin-hook",
+        "manual"
+      ]
+    },
+    "recording": {
+      "type": "object",
+      "required": [
+        "started_at",
+        "ended_at",
+        "complete"
+      ],
+      "properties": {
+        "started_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "ended_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "complete": {
+          "type": "boolean"
+        },
+        "gaps": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

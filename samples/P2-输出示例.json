@@ -1,0 +1,174 @@
+{
+  "questions": [
+    {
+      "id": "Q1",
+      "mode": "first_pass",
+      "variant_of": null,
+      "type": "复述解释题",
+      "tier": "normal",
+      "entry_id": "R1",
+      "component_id": "G-01",
+      "node_id": "R1",
+      "dial": 3,
+      "spot_check": false,
+      "skip_allowed": true,
+      "quote": "该方案通过过程性追问提升学生的认知参与度。",
+      "question": "请不用报告里的原词，解释“过程性追问提升学生的认知参与度”这句话的意思，并说明它为什么可能成立。",
+      "rubric": {
+        "expected_points": [
+          "说清“过程性追问提升学生的认知参与度”在报告里的意思",
+          "说明它与报告结论的关系",
+          "给出报告内的理由或条件"
+        ],
+        "must_not": [
+          "只照抄原文而不解释",
+          "引入报告以外的理论或数据"
+        ]
+      },
+      "followup": "你能用“因为—所以”再讲一遍吗？",
+      "difficulty": "高"
+    },
+    {
+      "id": "Q2",
+      "mode": "first_pass",
+      "variant_of": null,
+      "type": "术语定义题",
+      "tier": "normal",
+      "entry_id": "T2",
+      "component_id": "G-01",
+      "node_id": "T2",
+      "dial": 3,
+      "spot_check": false,
+      "skip_allowed": true,
+      "quote": "该方案通过过程性追问提升学生的认知参与度。",
+      "question": "请用自己的话定义“认知参与度”，并说明它在本报告里具体指什么。",
+      "rubric": {
+        "expected_points": [
+          "说清“认知参与度”在报告里的意思",
+          "说明它与报告结论的关系",
+          "给出报告内的理由或条件"
+        ],
+        "must_not": [
+          "只照抄原文而不解释",
+          "引入报告以外的理论或数据"
+        ]
+      },
+      "followup": "你能用“因为—所以”再讲一遍吗？",
+      "difficulty": "中"
+    },
+    {
+      "id": "Q3",
+      "mode": "first_pass",
+      "variant_of": null,
+      "type": "复述解释题",
+      "tier": "normal",
+      "entry_id": "R2",
+      "component_id": "G-01",
+      "node_id": "R2",
+      "dial": 3,
+      "spot_check": false,
+      "skip_allowed": true,
+      "quote": "已有研究表明，认知卸载会削弱深度学习，因此减少认知卸载是提升参与度的关键。",
+      "question": "请不用报告里的原词，解释“减少认知卸载是提升参与度的关键”这句话的意思，并说明它为什么可能成立。",
+      "rubric": {
+        "expected_points": [
+          "说清“减少认知卸载是提升参与度的关键”在报告里的意思",
+          "说明它与报告结论的关系",
+          "给出报告内的理由或条件"
+        ],
+        "must_not": [
+          "只照抄原文而不解释",
+          "引入报告以外的理论或数据"
+        ]
+      },
+      "followup": "你能用“因为—所以”再讲一遍吗？",
+      "difficulty": "高"
+    },
+    {
+      "id": "Q4",
+      "mode": "first_pass",
+      "variant_of": null,
+      "type": "术语定义题",
+      "tier": "normal",
+      "entry_id": "T1",
+      "component_id": "G-01",
+      "node_id": "T1",
+      "dial": 3,
+      "spot_check": false,
+      "skip_allowed": true,
+      "quote": "该方案通过过程性追问提升学生的认知参与度。",
+      "question": "请用自己的话定义“过程性追问”，并说明它在本报告里具体指什么。",
+      "rubric": {
+        "expected_points": [
+          "说清“过程性追问”在报告里的意思",
+          "说明它与报告结论的关系",
+          "给出报告内的理由或条件"
+        ],
+        "must_not": [
+          "只照抄原文而不解释",
+          "引入报告以外的理论或数据"
+        ]
+      },
+      "followup": "你能用“因为—所以”再讲一遍吗？",
+      "difficulty": "中"
+    }
+  ],
+  "budget": {
+    "total": 4,
+    "simple": 1,
+    "normal": 3,
+    "spotRate": 0.30000000000000004,
+    "skipLimit": 2,
+    "reaskLimit": 2,
+    "items": [
+      {
+        "component_id": "G-01",
+        "entry_id": "C2",
+        "tier": "normal",
+        "count": 3,
+        "reason": "AI 入口：优先考察",
+        "node_id": "C2",
+        "risk": "mid",
+        "origin": "ai"
+      },
+      {
+        "component_id": "G-01",
+        "entry_id": "R1",
+        "tier": "simple",
+        "count": 1,
+        "reason": "人类入口：先做一次廉价信任校验",
+        "node_id": "R1",
+        "risk": "high",
+        "origin": "human"
+      }
+    ]
+  },
+  "recording": {
+    "started_at": "2026-11-07T15:40:00+08:00",
+    "ended_at": "2026-11-07T15:55:00+08:00",
+    "complete": true,
+    "gaps": []
+  },
+  "lineage": [
+    {
+      "span_id": "s1",
+      "turn_id": "m1",
+      "author": "user",
+      "event": "pasted",
+      "range": [
+        0,
+        55
+      ]
+    },
+    {
+      "span_id": "s2",
+      "turn_id": "m3",
+      "author": "ai",
+      "event": "generated",
+      "range": [
+        0,
+        157
+      ]
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+# dependencies
+node_modules/
+tests/node_modules/
+tests/package.json
+tests/package-lock.json
+package-lock.json
+
+# local runs / generated data
+handoff/
+lineage/
+audit/
+understanding-auditor/recording/
+understanding-auditor/audit-state/
+understanding-auditor/dags/
+report-mode-record-test/
+auditor-198-test/
+*.log
+
+# archives and editor noise
+*.zip
+.DS_Store
+.idea/
+.vscode/
