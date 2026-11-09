@@ -18,6 +18,7 @@ auditor-198-test/
 
 # archives and editor noise
 *.zip
+*.tgz
 .DS_Store
 .idea/
 .vscode/

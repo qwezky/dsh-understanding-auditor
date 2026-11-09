@@ -30,8 +30,10 @@ DSH 插件：写作时用 `/record` 记录来源，读完后用 `/audit` 以三�
 
 ## 安装
 
+插件本体是 npm 包 `dsh-plugin-understanding-auditor-1.9.8.tgz`（不是 zip）。
+
 1. `git clone https://gitee.com/Tu_Di/dsh-understanding-auditor.git`
-2. 用 DSH 的 `plugin_manager install_bundle`，target 指向仓库里的 `plugin/` 绝对路径。
+2. 用 DSH 的 `plugin_manager install_bundle`，target 指向仓库里的 `plugin/` 绝对路径；或 `npm i ./dsh-plugin-understanding-auditor-1.9.8.tgz` 后让 profile 指向它。
 3. 重载 `/record`、`/audit` 所在 bundle。
 4. PDF 解析需要可选依赖 `pdfjs-dist@^6`；没装时记 gap，不阻塞。
 
